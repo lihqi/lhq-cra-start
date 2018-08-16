@@ -1,6 +1,8 @@
 const { injectBabelPlugin } = require('react-app-rewired');
+const rewireLodash = require('react-app-rewire-lodash');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
+// const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 module.exports = function override(config, env) {
     config.plugins.push(
         new BundleAnalyzerPlugin({
@@ -12,7 +14,7 @@ module.exports = function override(config, env) {
             //  将在“服务器”模式下使用的主机启动HTTP服务器。
             analyzerHost: '127.0.0.1',
             //  将在“服务器”模式下使用的端口启动HTTP服务器。
-            analyzerPort: 8888,
+            analyzerPort: 4396,
             //  路径捆绑，将在`static`模式下生成的报告文件。
             //  相对于捆绑输出目录。
             reportFilename: 'report.html',
@@ -34,10 +36,12 @@ module.exports = function override(config, env) {
             logLevel: 'info'
             // 日志级别。可以是'信息'，'警告'，'错误'或'沉默'。
         })
+        // new LodashModuleReplacementPlugin()
     );
     config = injectBabelPlugin(
         ['import', { libraryName: 'antd', style: 'css' }],
         config
     );
+    rewireLodash(config, env);
     return config;
 };
