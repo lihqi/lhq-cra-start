@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-// import _ from 'lodash';
-// console.log(_.add(1, 3));
-// let arr1 = [2, 44, 5];
-// let arr2 = [2];
-// console.log(_.difference(arr1, arr2));
+
 class App extends Component {
     render() {
         return (
